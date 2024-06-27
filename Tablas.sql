@@ -89,6 +89,7 @@ CREATE TABLE detalle_pedido (
     Producto_ID INT NOT NULL,
     Cantidad INT,
     Producto_Precio INT,
+    Valor_Domicilio INT,
     CONSTRAINT FK_ORDEN FOREIGN KEY (Orden_ID) REFERENCES pedidos(Orden_ID)
         ON DELETE CASCADE
         ON UPDATE CASCADE,

@@ -157,7 +157,8 @@ BEGIN
     END IF;
 END;
 
-
+/* Trigger que cuenta la cantidad de veces que un determinado producto fue solicitado
+   por un cliente */
 CREATE TRIGGER Ordenes_Productos AFTER INSERT ON detalle_pedido FOR EACH ROW
 BEGIN
     DECLARE Cantidad_Pedido_Producto INT;
@@ -167,4 +168,18 @@ BEGIN
 
     UPDATE productos SET `Cantidad_Pedidos` = Cantidad_Pedido_Producto 
     WHERE `Producto_ID` = NEW.`Producto_ID`;
+END;
+
+
+/* Trigger que trae el valor de domicilio de una orden se debe tener en cuenta que el valor se añade
+   en la tabla de detalle:pedido */
+CREATE TRIGGER Valor_Domicio BEFORE INSERT ON detalle_pedido FOR EACH ROW
+BEGIN
+    DECLARE Aplica_Domicilio BOOLEAN;
+
+    SELECT p.`Domicilio` INTO Aplica_Domicilio FROM pedidos p WHERE p.`Orden_ID` = NEW.`Orden_ID`;
+
+    IF Aplica_Domicilio IS TRUE THEN
+        SET NEW.Valor_Domicilio = 3000;
+    END IF;
 END;
