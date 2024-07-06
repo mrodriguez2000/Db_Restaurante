@@ -110,3 +110,7 @@ call restaurante.inserta_entrega_pedido(97, '2023-06-24 21:20:00');
 call restaurante.inserta_entrega_pedido(98, '2023-06-24 21:32:00');
 call restaurante.inserta_entrega_pedido(99, '2023-06-24 21:15:00');
 call restaurante.inserta_entrega_pedido(100, '2023-06-24 20:59:00');
+call restaurante.inserta_entrega_pedido(101, '2023-06-25 21:15:00');
+call restaurante.inserta_entrega_pedido(102, '2023-06-25 20:50:00');
+call restaurante.inserta_entrega_pedido(103, '2023-06-25 21:30:00');
+call restaurante.inserta_entrega_pedido(104, '2023-06-25 21:52:00');

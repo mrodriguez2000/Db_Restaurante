@@ -106,11 +106,3 @@ CREATE TABLE entrega_pedido (
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
-
-/*
-CREATE TABLE Precio_Anterior (
-    Registro_ID INT AUTO_INCREMENT PRIMARY KEY,
-    Producto_ID INT,
-    Precio_Producto INT
-);
-*/

@@ -97,7 +97,10 @@ VALUES
 ('Pablo Pineda', 'Masculino', '3142025465'),
 ('Paola Jaramillo', 'Femenino', '3014571261'),
 ('Diana Hurtado', 'Femenino', '3147859601'),
-('Arnold Gomez', 'Masculino', '3021456982');
+('Arnold Gomez', 'Masculino', '3021456982'),
+('Rolando Fuentes', 'Masculino', '3021456987'),
+('Lorena Cifuentes', 'Femenino', '3147856321'),
+('Melissa Gonzales', 'Femenino', '3012548632');
 
 /*
 INSERT INTO clientes
@@ -110,3 +113,43 @@ INSERT INTO domiciliarios
 VALUES
 ('Pedro Alvarado', '1992-11-08'),
 ('Pablo Velazques', '1992-01-11');
+
+
+
+SELECT p.`Orden_ID`,
+CASE
+    WHEN p.`Domicilio` = TRUE THEN "Por domicilio"
+    ELSE "En restaurante"
+END AS Tipo_Entrega, p.`Direccion` AS Direccion_Entrega, mp.`Metodo_Pago_Nombre` AS Metodo_Pago,
+cl.`Cliente_Nombre`, p.`Fecha_Pedido`, ep.`Fecha_Entrega`, pdc.`Producto_Nombre`, 
+cp.`Categoria_Nombre` AS Categoria_Producto, dp.`Cantidad` AS Cantidad_Producto, pdc.`Producto_Precio`,
+cl.`Cliente_Genero`
+FROM
+    pedidos p
+    INNER JOIN detalle_pedido dp ON p.`Orden_ID` = dp.`Orden_ID`
+    INNER JOIN productos pdc ON pdc.`Producto_ID` = dp.`Producto_ID`
+    INNER JOIN clientes cl ON cl.`Cliente_ID` = p.`Cliente_ID`
+    INNER JOIN categoria_producto cp ON cp.`Categoria_ID` = pdc.`Categoria_ID`
+    INNER JOIN entrega_pedido ep ON ep.`Orden_ID` = p.`Orden_ID`
+    INNER JOIN metodo_pago mp ON mp.`Metodo_ID` = p.`Metodo_ID`    
+WHERE
+    cl.`Cliente_Genero` = 'Masculino'
+UNION
+SELECT p.`Orden_ID`,
+CASE
+    WHEN p.`Domicilio` = TRUE THEN "Por domicilio"
+    ELSE "En restaurante"
+END AS Tipo_Entrega, p.`Direccion` AS Direccion_Entrega, mp.`Metodo_Pago_Nombre` AS Metodo_Pago,
+cl.`Cliente_Nombre`, p.`Fecha_Pedido`, ep.`Fecha_Entrega`, pdc.`Producto_Nombre`, 
+cp.`Categoria_Nombre` AS Categoria_Producto, dp.`Cantidad` AS Cantidad_Producto, pdc.`Producto_Precio`,
+cl.`Cliente_Genero`
+FROM
+    pedidos p
+    INNER JOIN detalle_pedido dp ON p.`Orden_ID` = dp.`Orden_ID`
+    INNER JOIN productos pdc ON pdc.`Producto_ID` = dp.`Producto_ID`
+    INNER JOIN clientes cl ON cl.`Cliente_ID` = p.`Cliente_ID`
+    INNER JOIN categoria_producto cp ON cp.`Categoria_ID` = pdc.`Categoria_ID`
+    INNER JOIN entrega_pedido ep ON ep.`Orden_ID` = p.`Orden_ID`
+    INNER JOIN metodo_pago mp ON mp.`Metodo_ID` = p.`Metodo_ID`    
+WHERE
+    cl.`Cliente_Genero` = 'Femenino';
